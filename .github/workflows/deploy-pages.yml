@@ -1,0 +1,44 @@
+name: Deploy MK Mock Reports
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: mk-mock-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v5
+      - name: Prepare independent mock website
+        run: |
+          mkdir -p _site
+          unzip -q frontend.zip -d _site
+          for archive in pdfs-*.zip; do unzip -q "$archive" -d _site; done
+          test -f _site/index.html
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('_site')
+          manifest=json.loads((root/'release.json').read_text())
+          records=[json.loads(p.read_text()) for p in (root/'reports').glob('*.json')]
+          assert len(records)==manifest['studentFiles']
+          assert sum(len(x['reports']) for x in records)==manifest['reports']
+          assert len(list((root/'pdfs').glob('*.pdf')))==manifest['pdfFiles']
+          assert all((root/r['pdfPath']).is_file() for x in records for r in x['reports'])
+          PY
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
