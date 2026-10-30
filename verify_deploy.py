@@ -20,7 +20,7 @@ for relative, p in actual.items():
 
 reports = []
 records = sorted((site / 'reports').glob('*.json'))
-assert manifest['release'] == 'mock-20261029-2359-final'
+assert manifest['release'] == 'mock-20261030-score-rank'
 assert len(records) == manifest['students']
 for path in records:
     record = json.loads(path.read_text())
@@ -49,7 +49,7 @@ assert {tuple(r) for r in manifest['legacyRoutes']} <= routes, 'Previously publi
 assert len(list((site / 'pdfs').glob('*.pdf'))) == manifest['reports']
 for report in reports:
     cohort = [r for r in reports if r['level'] == report['level']]
-    expected_rank = 1 + sum(r['score'] > report['score'] for r in cohort)
+    expected_rank = 1 + len({r['score'] for r in cohort if r['score'] > report['score']})
     expected_pr = 100 * sum(r['score'] < report['score'] for r in cohort) / len(cohort)
     assert report['cohortSize'] == len(cohort) and report['rank'] == expected_rank
     assert abs(report['percentile'] - expected_pr) < 1e-10

@@ -19,16 +19,22 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            /.github/workflows/deploy-pages.yml
+            /mock-20261030-score-rank-*.zip
+            /deploy-manifest.json
+            /verify_deploy.py
+          sparse-checkout-cone-mode: false
       - uses: actions/configure-pages@v5
-      - name: Prepare final reports with same-Level ranking
+      - name: Prepare reports with consecutive distinct-score ranks
         run: |
           mkdir -p _site
-          unzip -q mock-20261029-2359-final-frontend.zip -d _site
-          for archive in mock-20261029-2359-final-pdfs-*.zip; do
+          unzip -q mock-20261030-score-rank-frontend.zip -d _site
+          for archive in mock-20261030-score-rank-pdfs-*.zip; do
             test -f "$archive"
             unzip -q "$archive" -d _site
           done
-          unzip -oq mock-20261030-tracking-overlay.zip -d _site
           python3 verify_deploy.py _site deploy-manifest.json
       - uses: actions/upload-pages-artifact@v4
         with:
