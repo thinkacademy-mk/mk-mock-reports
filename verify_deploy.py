@@ -20,7 +20,8 @@ for relative, p in actual.items():
 
 reports = []
 records = sorted((site / 'reports').glob('*.json'))
-assert len(records) == 264
+assert manifest['release'] == 'mock-20261029-2359-final'
+assert len(records) == manifest['students']
 for path in records:
     record = json.loads(path.read_text())
     assert record['schemaVersion'] == 3 and record['reportType'] == 'mk-mock-report'
@@ -40,10 +41,12 @@ for path in records:
         assert report['htmlPath'] in actual and report['pdfPath'] in actual
         assert actual[report['pdfPath']].read_bytes().startswith(b'%PDF-')
         reports.append(report)
-assert len(reports) == 270
+assert len(reports) == manifest['reports']
 counts = collections.Counter(r['level'] for r in reports)
-assert counts == {'1-2': 113, '3-4': 132, '5-6': 25}
-assert len(list((site / 'pdfs').glob('*.pdf'))) == 270
+assert counts == manifest['reportsByLevel']
+routes = {(p.stem, r['level']) for p in records for r in json.loads(p.read_text())['reports']}
+assert {tuple(r) for r in manifest['legacyRoutes']} <= routes, 'Previously published routes disappeared'
+assert len(list((site / 'pdfs').glob('*.pdf'))) == manifest['reports']
 for report in reports:
     cohort = [r for r in reports if r['level'] == report['level']]
     expected_rank = 1 + sum(r['score'] > report['score'] for r in cohort)
@@ -58,9 +61,10 @@ for report in reports:
     assert f'{len(cohort)} participants' in overview
     assert 'same Level and grade' not in overview
     assert report['pdfPath'] in source
+    assert 'OFFLINE BASELINE DEMO' not in source, 'Offline fixture must never be published'
 assert 'report-catalog' not in actual['index.html'].read_text(), 'Admin catalog must not replace the parent lookup'
 assert 'student-number' in actual['index.html'].read_text()
 assert 'report/index.html' in actual
-print(json.dumps({'passed': True, 'students': 264, 'reports': 270, 'pdfs': 270,
+print(json.dumps({'passed': True, 'students': len(records), 'reports': len(reports), 'pdfs': len(reports),
                   'cohorts': dict(counts), 'rankingBasis': 'same Level, all school grades',
                   'files': len(actual)}))
