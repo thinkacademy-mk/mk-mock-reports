@@ -28,6 +28,7 @@ jobs:
             test -f "$archive"
             unzip -q "$archive" -d _site
           done
+          unzip -oq mock-20261030-tracking-overlay.zip -d _site
           python3 verify_deploy.py _site deploy-manifest.json
       - uses: actions/upload-pages-artifact@v4
         with:
