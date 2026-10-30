@@ -20,11 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: actions/configure-pages@v5
-      - name: Prepare 270 final reports with same-Level ranking
+      - name: Prepare final reports with same-Level ranking
         run: |
           mkdir -p _site
-          unzip -q mock-20261029-frontend.zip -d _site
-          for archive in mock-20261029-pdfs-*.zip; do
+          unzip -q mock-20261029-2359-final-frontend.zip -d _site
+          for archive in mock-20261029-2359-final-pdfs-*.zip; do
             test -f "$archive"
             unzip -q "$archive" -d _site
           done
