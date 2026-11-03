@@ -22,16 +22,18 @@ jobs:
         with:
           sparse-checkout: |
             /.github/workflows/deploy-pages.yml
-            /mock-20261030-score-rank-*.zip
+            /mock-current-frontend.zip
+            /mock-20261030-score-rank-pdfs-*.zip
+            /mock-incremental-*-pdfs-*.zip
             /deploy-manifest.json
             /verify_deploy.py
           sparse-checkout-cone-mode: false
       - uses: actions/configure-pages@v5
-      - name: Prepare reports with consecutive distinct-score ranks
+      - name: Prepare existing reports and new completions
         run: |
           mkdir -p _site
-          unzip -q mock-20261030-score-rank-frontend.zip -d _site
-          for archive in mock-20261030-score-rank-pdfs-*.zip; do
+          unzip -q mock-current-frontend.zip -d _site
+          for archive in mock-20261030-score-rank-pdfs-*.zip mock-incremental-*-pdfs-*.zip; do
             test -f "$archive"
             unzip -q "$archive" -d _site
           done
