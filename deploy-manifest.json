@@ -1,11 +1,11 @@
 {
-  "release": "mock-incremental-20261105T080502Z",
-  "students": 283,
-  "reports": 289,
+  "release": "mock-incremental-20261106T023313Z-manual",
+  "students": 284,
+  "reports": 290,
   "reportsByLevel": {
     "3-4": 141,
     "5-6": 29,
-    "1-2": 119
+    "1-2": 120
   },
   "referenceScoresByLevel": {
     "1-2": [
@@ -885,6 +885,10 @@
     "ce041d4ba524456169fc834244d5ce88-3-4.html": {
       "bytes": 22700,
       "sha256": "aec2a01a1d94240fe4a22014b039a7f710303704456da6e8d0e586c77286ec9d"
+    },
+    "7b5759ab3de64b0ec1461312974395a3-5-6.html": {
+      "bytes": 30966,
+      "sha256": "51c9799ad8d9f71717c62895c7e629e85130dc533fab72c98618f3ee72b4d0e0"
     },
     "e8bb6aabfb48d9efe381820cdd2d054d-1-2.html": {
       "bytes": 24170,
@@ -2209,6 +2213,10 @@
     "pdfs/effda4eea75dd4342794e5ea127252ca-3-4.pdf": {
       "bytes": 1193013,
       "sha256": "b1e33372537dede05070c2c0b9e110c07753cbf463ab602bdc958747ada55b8d"
+    },
+    "pdfs/7b5759ab3de64b0ec1461312974395a3-5-6.pdf": {
+      "bytes": 3765226,
+      "sha256": "d4b8e6959aa3fd75b020aa9e8d749111b63a7ae71e8f1ea9015d9219e193ed39"
     },
     "pdfs/fa195384e3ed834d37784cc0d1322ab3-1-2.pdf": {
       "bytes": 742221,
@@ -5294,6 +5302,19 @@
       }
     },
     {
+      "token": "7b5759ab3de64b0ec1461312974395a3",
+      "report": {
+        "level": "5-6",
+        "score": 94,
+        "maximum": 120,
+        "rank": 10,
+        "percentile": 53.84615384615385,
+        "cohortSize": 26,
+        "htmlPath": "7b5759ab3de64b0ec1461312974395a3-5-6.html",
+        "pdfPath": "pdfs/7b5759ab3de64b0ec1461312974395a3-5-6.pdf"
+      }
+    },
+    {
       "token": "72a27f7c9b0954717591c3d80e0fb723",
       "report": {
         "level": "5-6",
@@ -6582,7 +6603,7 @@
     }
   ],
   "newReportKeys": [
-    "7b5759ab3de64b0ec1461312974395a3-5-6"
+    "a2eeddff4d5c1a3dc7ab448dc610826a-1-2"
   ],
   "files": {
     "ec764d75131fe20df842c6ea3fc56a3b-1-2.html": {
@@ -7241,13 +7262,17 @@
       "bytes": 25500,
       "sha256": "560a5f706594ff62901af39ad2f354541edf9d5aa246029980653a4098c4583e"
     },
+    "a2eeddff4d5c1a3dc7ab448dc610826a-1-2.html": {
+      "bytes": 29921,
+      "sha256": "a3d35c6e61ab0714e66c02979496f9821107d0052496dac4a761e3312aa3550f"
+    },
     ".nojekyll": {
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "release.json": {
-      "bytes": 1744,
-      "sha256": "547bbc0e25c0235054d4435068d93eb926b5310636ac6a3e223dc4e2bfb053a7"
+      "bytes": 1758,
+      "sha256": "5b2d889fc912828fd4dc3485947d45ab58bb4a02ba45157c70a966887c85e2dd"
     },
     "2e4877379c15af5140f161d7cf136d50-3-4.html": {
       "bytes": 23322,
@@ -8729,6 +8754,10 @@
       "bytes": 2182212,
       "sha256": "6c83511d04eaa8ed783dc696e3ecdaf68aae6a2f777a2c1ba4bacc098a257370"
     },
+    "pdfs/a2eeddff4d5c1a3dc7ab448dc610826a-1-2.pdf": {
+      "bytes": 3574646,
+      "sha256": "87dccee9557d578865332760071c8bd3445bc92f2754a029343ea8118f0e28b4"
+    },
     "pdfs/9fafe8efab04972a15d9d66089ed5b07-3-4.pdf": {
       "bytes": 787280,
       "sha256": "ceac0d0d1410e4632f7a8f5022e943e78bc266ded8be26b948a12082efb12379"
@@ -10000,6 +10029,10 @@
     "reports/a9dca2469d2de39951e4ded6813dcf01.json": {
       "bytes": 304,
       "sha256": "44324cda4f48b0153f30cf177f35620c4aaaac956d6633a7da8348c5f9b5b803"
+    },
+    "reports/a2eeddff4d5c1a3dc7ab448dc610826a.json": {
+      "bytes": 398,
+      "sha256": "e87f93de43b69102086d6c3e5bf546027a0ce35a24345388589566191e28a896"
     },
     "reports/85a067cb7c37ae3c55ae65bb389f0a2f.json": {
       "bytes": 303,
